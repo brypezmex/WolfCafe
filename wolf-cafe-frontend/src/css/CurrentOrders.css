@@ -1,0 +1,15 @@
+
+
+.confirm-button {
+  background: #c0392b;
+  border: 0.0625rem solid #a42213;
+  color: rgb(244, 244, 244);
+  width: 85%;
+  min-width: 5.5rem;
+  white-space: nowrap;
+}
+
+.confirm-button:hover {
+  background: #f27f73;
+  color: rgb(244, 244, 244);
+}

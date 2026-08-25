@@ -1,0 +1,157 @@
+/*
+ * Tables live inside .table-wrap. A <table> cannot scroll itself -- the old
+ * rule here set `overflow: scroll` and then `overflow: hidden` in the same
+ * block, so the first was dead and the table simply overflowed the page. The
+ * wrapper does the scrolling instead, which keeps wide tables inside their
+ * column on narrow screens rather than widening the whole document.
+ */
+.table-wrap {
+  width: 100%;
+  max-width: 75rem;
+
+  overflow-x: auto;
+  overflow-y: hidden;
+
+  border-radius: 1rem;
+  background: rgba(255, 255, 255, 0.18);
+  backdrop-filter: blur(24px) saturate(1.6);
+  -webkit-backdrop-filter: blur(24px) saturate(1.6);
+  border: 0.0625rem solid rgba(255, 255, 255, 0.45);
+  box-shadow:
+    0 8px 32px rgba(0, 0, 0, 0.1),
+    inset 0 1px 0 rgba(255, 255, 255, 0.6),
+    inset 0 -1px 0 rgba(255, 255, 255, 0.15);
+}
+
+table {
+  width: 100%;
+  /* Below this the wrapper scrolls sideways instead of columns collapsing into
+     unreadable slivers. */
+  min-width: 34rem;
+
+  border-collapse: separate;
+  border-spacing: 0;
+  background: transparent;
+  border-radius: 1rem;
+  overflow: hidden;
+}
+
+thead tr {
+  background: rgba(255, 255, 255, 0.85);
+}
+
+thead th {
+  padding: 0.9rem 1.25rem;
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: #c0392b;
+  text-align: left;
+  border-bottom: 0.0625rem solid rgba(255, 255, 255, 0.4);
+}
+
+thead th:empty {
+  padding: 0.9rem 1.25rem;
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: #c0392b;
+  text-align: left;
+  border-bottom: 0.0625rem solid rgba(255, 255, 255, 0.4);
+}
+
+tbody tr {
+    background: rgba(255, 255, 255, 0.70);
+  transition: background 0.2s ease;
+}
+
+tbody tr:not(:last-child) td {
+  border-bottom: 0.0625rem solid rgba(255, 255, 255, 0.25);
+}
+
+tbody tr:hover {
+  background: rgba(255, 255, 255, 0.15);
+}
+
+tbody td {
+  padding: 0.8rem 1.25rem;
+  font-size: 0.95rem;
+  color: #2c2c2a;
+  vertical-align: middle;
+  overflow-wrap: break-word;
+}
+
+.delete {
+    color: white;
+}
+
+tbody td input[type='number'] {
+  width: 5rem;
+  background: rgba(255, 255, 255, 0.35);
+  border: 0.0625rem solid rgba(255, 255, 255, 0.55);
+  border-radius: 0.5rem;
+  padding: 0.35rem 0.65rem;
+  font-size: 0.9rem;
+  color: #2c2c2a;
+  outline: none;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  -moz-appearance: textfield;
+}
+
+tbody td input[type='number']::-webkit-inner-spin-button,
+tbody td input[type='number']::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+}
+
+tbody td input[type='number']:focus {
+  border-color: rgba(192, 57, 43, 0.45);
+  box-shadow: 0 0 0 3px rgba(192, 57, 43, 0.1);
+}
+
+tbody td button {
+  width: 2rem;
+  height: 2rem;
+  background: rgba(255, 255, 255, 0.35);
+  border: 0.0625rem solid rgba(255, 255, 255, 0.55);
+  border-radius: 0.5rem;
+  color: #2c2c2a;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  margin-right: 0.35rem;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  transition: background 0.2s ease, color 0.2s ease, transform 0.1s ease;
+}
+
+tbody td button:hover {
+  background: rgba(192, 57, 43, 0.15);
+  color: #c0392b;
+  transform: translateY(-1px);
+}
+
+tbody td button:active {
+  transform: translateY(0);
+}
+@media (max-width: 48rem) {
+  table {
+    min-width: 30rem;
+  }
+
+  thead th {
+    padding: 0.7rem 0.85rem;
+  }
+
+  tbody td {
+    padding: 0.65rem 0.85rem;
+    font-size: 0.88rem;
+  }
+
+  tbody td input[type='number'] {
+    width: 4rem;
+  }
+}

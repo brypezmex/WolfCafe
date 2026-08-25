@@ -1,0 +1,112 @@
+# WolfCafe deployment stack.
+#
+# The browser only ever talks to the `frontend` service. nginx serves the built
+# React app and reverse-proxies /api to `backend`, so every request is
+# same-origin. That is what makes this portable: point a Cloudflare Tunnel (or
+# any reverse proxy) at the frontend port and the app works unchanged, with no
+# hostname or IP compiled into the build.
+#
+#   cp .env.example .env   # then edit the passwords
+#   docker compose up -d --build
+
+services:
+  db:
+    image: mysql:8.4
+    restart: unless-stopped
+    environment:
+      MYSQL_ROOT_PASSWORD: ${DB_PASSWORD:?set DB_PASSWORD in .env}
+      MYSQL_DATABASE: ${DB_NAME:-wolfcafe}
+    command:
+      - --character-set-server=utf8mb4
+      - --collation-server=utf8mb4_unicode_ci
+    volumes:
+      - db-data:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "127.0.0.1", "-uroot", "-p${DB_PASSWORD}"]
+      interval: 10s
+      timeout: 5s
+      retries: 12
+      start_period: 40s
+    networks:
+      - wolfcafe
+    # The database is only reachable from inside the compose network. Uncomment
+    # to inspect it from the Proxmox host with a client.
+    # ports:
+    #   - "127.0.0.1:3306:3306"
+
+  backend:
+    build:
+      context: ./wolf-cafe-backend
+    restart: unless-stopped
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      DB_HOST: db
+      DB_PORT: "3306"
+      DB_NAME: ${DB_NAME:-wolfcafe}
+      DB_USERNAME: root
+      DB_PASSWORD: ${DB_PASSWORD:?set DB_PASSWORD in .env}
+
+      JWT_SECRET: ${JWT_SECRET:?set JWT_SECRET in .env}
+      JWT_EXPIRATION_MS: ${JWT_EXPIRATION_MS:-604800000}
+      # Shared by the seeded admin, staff, and customer accounts.
+      DEFAULT_PASSWORD: ${DEFAULT_PASSWORD:?set DEFAULT_PASSWORD in .env}
+
+      # Requests arrive same-origin through the nginx proxy, so CORS is not in
+      # play. Narrow this to your tunnel hostname if you ever expose the API
+      # directly on its own origin.
+      CORS_ALLOWED_ORIGINS: ${CORS_ALLOWED_ORIGINS:-*}
+
+      # Nightly wipe-and-reseed. Cron is Spring's 6-field format.
+      DB_RESET_ENABLED: ${DB_RESET_ENABLED:-true}
+      DB_RESET_CRON: ${DB_RESET_CRON:-0 0 0 * * *}
+      DB_RESET_ZONE: ${DB_RESET_ZONE:-America/New_York}
+
+      PROFANITY_FILTER_ENABLED: ${PROFANITY_FILTER_ENABLED:-true}
+      TZ: ${DB_RESET_ZONE:-America/New_York}
+    healthcheck:
+      test: ["CMD", "curl", "-fsS", "http://127.0.0.1:8080/actuator/health"]
+      interval: 15s
+      timeout: 5s
+      retries: 10
+      start_period: 90s
+    networks:
+      - wolfcafe
+
+  frontend:
+    build:
+      context: ./wolf-cafe-frontend
+      args:
+        # Relative path: resolved against whatever host serves the page.
+        VITE_API_BASE_URL: ${VITE_API_BASE_URL:-/api}
+    restart: unless-stopped
+    depends_on:
+      backend:
+        condition: service_healthy
+    ports:
+      # Point the Cloudflare Tunnel at this port.
+      - "${WEB_PORT:-8080}:80"
+    networks:
+      - wolfcafe
+
+  # Optional: run the tunnel alongside the app instead of on the host.
+  #   docker compose --profile tunnel up -d
+  # TUNNEL_TOKEN comes from the Cloudflare Zero Trust dashboard, and the tunnel's
+  # public hostname should route to http://frontend:80.
+  cloudflared:
+    image: cloudflare/cloudflared:latest
+    restart: unless-stopped
+    profiles: ["tunnel"]
+    command: tunnel --no-autoupdate run --token ${TUNNEL_TOKEN:-}
+    depends_on:
+      - frontend
+    networks:
+      - wolfcafe
+
+volumes:
+  db-data:
+
+networks:
+  wolfcafe:
+    driver: bridge

@@ -1,0 +1,90 @@
+# Blocked terms for user-supplied text (account names, drink names, item
+# descriptions, ingredient names).
+#
+# One term per line; blank lines and lines starting with '#' are ignored.
+#
+# Terms here are matched as WHOLE WORDS after the text is lowercased and
+# leetspeak is folded ("sh1t" -> "shit", "@ss" -> "ass"). Whole-word matching
+# means an entry such as "ass" blocks "you ass" but not "Lemongrass Tea", and
+# "rape" does not block "Grape Juice".
+#
+# Terms that should also be caught in the middle of a run-together string
+# belong in strict-terms.txt as well.
+
+anal
+anus
+arse
+arsehole
+ass
+asshole
+bastard
+bitch
+blowjob
+bollocks
+boner
+boob
+boobs
+bugger
+bullshit
+chink
+clit
+cock
+coon
+cum
+cunt
+dick
+dildo
+dyke
+fag
+faggot
+fellatio
+fuck
+fucker
+fucking
+gook
+handjob
+hentai
+homo
+jerkoff
+jizz
+kike
+kunt
+masturbate
+motherfucker
+nigga
+nigger
+nutsack
+paki
+penis
+piss
+poop
+porn
+prick
+pube
+pubes
+pussy
+queer
+rape
+rapist
+retard
+rimjob
+scrotum
+semen
+sex
+shit
+skank
+slut
+smegma
+spic
+spunk
+tits
+titties
+titty
+towelhead
+tranny
+twat
+vagina
+wank
+wanker
+whore
+wop

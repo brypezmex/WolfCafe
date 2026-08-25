@@ -1,0 +1,11 @@
+# Benign words that contain one of the strict terms as a substring. These are
+# removed from the text before the substring scan, so "Shiitake Mushroom Latte"
+# is accepted while "sh1itake sh1t" is still rejected.
+#
+# One word per line; blank lines and lines starting with '#' are ignored.
+# Entries are compared after the same lowercasing and letter-collapsing applied
+# to the text being checked.
+
+scunthorpe
+shiitake
+shittake

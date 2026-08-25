@@ -1,0 +1,24 @@
+.history-view-button {
+    color: rgb(113, 164, 246);
+    cursor: pointer;
+}
+
+.order-financials {
+  margin-top: 10px;
+  border-top: 1px solid #ddd;
+  padding-top: 8px;
+}
+
+.financial-line {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.9rem;
+  padding: 2px 0;
+}
+
+.total-line {
+  font-weight: bold;
+  margin-top: 4px;
+  border-top: 1px solid #ddd;
+  padding-top: 4px;
+}

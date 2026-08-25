@@ -1,0 +1,158 @@
+/* =============================================
+   TaxRate.css — Tax Rate Slider
+   Matches Modal.css glass aesthetic
+   ============================================= */
+
+.tax-rate-container {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  /* Left-aligned within the centred content column. #main-container already
+     supplies the outer gutter, so the old 5vw margin is not needed and would
+     have shifted with the scrollbar on Windows. */
+  margin-right: auto;
+  width: 100%;
+  max-width: 40rem;
+}
+
+.tax-rate-container h2 {
+  font-size: clamp(1.35rem, 1.1rem + 1vw, 1.75rem);
+  font-weight: 700;
+  letter-spacing: 0.01em;
+  color: #000000;
+  margin: 0;
+}
+
+/* ---------- Number input ---------- */
+.tax-rate-number-row {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.tax-rate-number-row input[type='number'] {
+  width: 5rem;
+  padding: 0.5rem 0.75rem;
+  background: rgba(255, 255, 255, 0.75);
+  border: 0.0625rem solid rgba(0, 0, 0, 0.1);
+  border-radius: 0.65rem;
+  color: #1a1a1a;
+  font-size: 1.5rem;
+  outline: none;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  -moz-appearance: textfield;
+}
+
+.tax-rate-number-row input[type='number']::-webkit-inner-spin-button,
+.tax-rate-number-row input[type='number']::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+}
+
+.tax-rate-number-row input[type='number']:focus {
+  border-color: rgba(192, 57, 43, 0.45);
+  box-shadow: 0 0 0 3px rgba(192, 57, 43, 0.1);
+}
+
+.tax-rate-number-row span {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: #000000;
+}
+
+/* ---------- Slider ---------- */
+.tax-rate-slider-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.tax-rate-slider-wrapper input[type='range'] {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 100%;
+  height: 0.5rem;
+  border-radius: 12px;
+
+  background: linear-gradient(
+    to right,
+    #c0392b calc(var(--val) * 1%),
+    rgba(0, 0, 0, 0.1) calc(var(--val) * 1%)
+  );
+  outline: none;
+  cursor: pointer;
+}
+
+.tax-rate-slider-wrapper input[type='range']::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: #c0392b;
+  border: 2px solid white;
+  box-shadow: 0 1px 6px rgba(192, 57, 43, 0.35);
+  cursor: pointer;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.tax-rate-slider-wrapper input[type='range']::-webkit-slider-thumb:hover {
+  transform: scale(1.15);
+  box-shadow: 0 2px 10px rgba(192, 57, 43, 0.45);
+}
+
+.tax-rate-slider-wrapper input[type='range']::-moz-range-thumb {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: #c0392b;
+  border: 2px solid white;
+  box-shadow: 0 1px 6px rgba(192, 57, 43, 0.35);
+  cursor: pointer;
+}
+
+.tax-rate-labels {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: #000000;
+  letter-spacing: 0.05em;
+}
+
+#save-tax-button {
+  align-self: flex-start;
+  padding: 0.7rem 2rem;
+  background: #c0392b;
+  border: none;
+  border-radius: 0.65rem;
+  color: #fff;
+  font-size: 0.92rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  cursor: pointer;
+  transition: background 0.2s ease, transform 0.1s ease, box-shadow 0.2s ease;
+  box-shadow: 0 4px 16px rgba(192, 57, 43, 0.28);
+}
+ 
+#save-tax-button:hover {
+  background: #e04a3a;
+  transform: translateY(-1px);
+  box-shadow: 0 6px 20px rgba(192, 57, 43, 0.35);
+}
+ 
+#save-tax-button:active {
+  transform: scale(0.97);
+}
+ 
+#save-tax-button:disabled {
+  background: rgba(192, 57, 43, 0.45);
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+@media (max-width: 30rem) {
+  #save-tax-button {
+    align-self: stretch;
+    text-align: center;
+  }
+}

@@ -1,0 +1,142 @@
+#register-background {
+  width: 100%;
+  height: 100%;
+  background: rgba(255, 255, 255, 0.9);
+  display: flex;
+  padding: 2rem 1rem;
+
+  /* Scrolls internally when the card is taller than a short window (a phone in
+     landscape, say). Centring is done with `margin: auto` on the card rather
+     than `align-items: center`, because a centred flex item that overflows gets
+     clipped at the top edge with no way to scroll back up to it. Auto margins
+     collapse to zero once space runs out, so the card stays fully reachable. */
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+#register-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2rem;
+  width: 100%;
+  max-width: 23.75rem;
+  /* Centres in both axes when there is room; see #register-background above. */
+  margin: auto;
+}
+
+#register-container {
+  text-align: center;
+}
+
+#register-logo {
+  font-size: clamp(2.5rem, 1.5rem + 4vw, 4rem);
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  color: #c0392b;
+}
+
+#register-error {
+  color: #c0392b;
+  font-size: 0.85rem;
+  text-align: center;
+}
+
+#register-form {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+  padding: 2rem;
+  background: rgba(255, 255, 255, 0.55);
+  border: 1px solid rgba(255, 255, 255, 0.8);
+  border-radius: 20px;
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  box-shadow:
+    0 0 0 1px rgba(247, 84, 84, 0.07),
+    inset 0 1px 0 rgba(255, 255, 255, 0.9),
+    0 8px 32px rgba(0, 0, 0, 0.08);
+}
+
+#register-username,
+#register-password,
+#register-confirm,
+#register-name,
+#register-email {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  background: rgba(255, 255, 255, 0.7);
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+  color: #1a1a1a;
+  font-size: 0.95rem;
+  outline: none;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+#register-username::placeholder,
+#register-password::placeholder,
+#register-confirm::placeholder,
+#register-name::placeholder,
+#register-email::placeholder {
+  color: rgba(0, 0, 0, 0.3);
+}
+
+#register-username:focus,
+#register-password:focus,
+#register-name:focus,
+#register-confirm:focus,
+#register-email:focus {
+  border-color: rgba(247, 84, 84, 0.5);
+  box-shadow: 0 0 0 3px rgba(247, 84, 84, 0.1);
+}
+
+#register-button {
+  margin-top: 0.4rem;
+  padding: 0.8rem 1rem;
+  width: 100%;
+  background: #c0392b;
+  border: none;
+  border-radius: 10px;
+  color: #fff;
+  font-size: 0.95rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  cursor: pointer;
+  transition: background 0.2s, transform 0.1s;
+  box-shadow: 0 4px 16px rgba(247, 84, 84, 0.3);
+}
+
+#register-button:hover {
+  background: #f76a6a;
+}
+
+#register-button:active {
+  transform: scale(0.98);
+}
+
+#register-login-button {
+    text-align: center;
+    color: rgb(113, 164, 246);
+    cursor: pointer;
+}
+
+#register-login-button:hover {
+
+    color: rgb(72, 138, 245);
+}
+@media (max-width: 30rem) {
+  #register-background {
+    padding: 1.25rem 0.85rem;
+  }
+
+  #register-form {
+    padding: 1.35rem;
+  }
+
+  #logo-container img {
+    width: 2.5rem;
+    height: 2.5rem;
+  }
+}

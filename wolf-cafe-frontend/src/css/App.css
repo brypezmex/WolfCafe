@@ -1,0 +1,31 @@
+/* =============================================
+   App.css — application shell
+   ============================================= */
+
+#app-background {
+  width: 100%;
+  height: 100%;
+  /* Dynamic viewport height accounts for mobile browser chrome that appears
+     and disappears while scrolling. Ignored by browsers that lack it, which
+     fall back to the 100% above. */
+  height: 100dvh;
+
+  background: linear-gradient(270deg, #fabfb9, #fda8a0, #f98a8a, #f96e6e);
+  background-size: 400% 400%;
+  animation: gradientShift 25s ease infinite;
+
+  overflow: hidden;
+}
+
+@keyframes gradientShift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* Respect users who have asked the OS to reduce motion. */
+@media (prefers-reduced-motion: reduce) {
+  #app-background {
+    animation: none;
+  }
+}

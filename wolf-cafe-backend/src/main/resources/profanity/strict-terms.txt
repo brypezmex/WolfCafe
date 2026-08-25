@@ -1,0 +1,37 @@
+# Terms that are also matched as a SUBSTRING of the run-together text, after
+# punctuation, spaces, and repeated letters are stripped. This catches padded
+# and spaced-out obfuscation such as "s.h.i.t", "f u c k", and "shiiiit".
+#
+# Only include terms that do not appear inside ordinary English words -- a term
+# listed here will match anywhere. Anything ambiguous ("ass", "spic", "rape",
+# "sex", "cum", "coon", "homo") must stay out of this file and rely on the
+# whole-word matching in terms.txt instead.
+#
+# Any benign word that does contain one of these (for example "shiitake"
+# contains "shiit") must be added to allowed-words.txt.
+
+asshole
+bitch
+blowjob
+bollocks
+bullshit
+cunt
+dildo
+faggot
+fuck
+handjob
+jizz
+kike
+motherfucker
+nigga
+nigger
+nutsack
+pussy
+rimjob
+shit
+skank
+slut
+smegma
+twat
+wanker
+whore

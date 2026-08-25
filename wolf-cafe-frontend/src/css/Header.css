@@ -1,0 +1,49 @@
+header {
+  /* Sized by its content rather than a percentage of the shell, so it cannot
+     drift out of sync with the scrolling area beneath it. */
+  flex: 0 0 auto;
+  width: 100%;
+  min-height: 3.5rem;
+
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.65rem 1.25rem;
+  background: rgba(255, 255, 255, 0.9);
+}
+
+#user-icon {
+  width: 2.5rem;
+  aspect-ratio: 1 / 1;
+  flex: 0 0 auto;
+  border: 0.125rem solid black;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1rem;
+  font-weight: 600;
+  line-height: 1;
+  margin: 0;
+}
+
+#username {
+  /* Long usernames truncate rather than pushing the header wider. */
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  max-width: 12rem;
+}
+
+@media (max-width: 30rem) {
+  header {
+    min-height: 3rem;
+    padding: 0.5rem 0.75rem;
+  }
+
+  #username {
+    max-width: 8rem;
+    font-size: 0.9rem;
+  }
+}

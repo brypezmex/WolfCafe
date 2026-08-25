@@ -1,0 +1,54 @@
+
+
+.complete-button {
+  background: #c0392b;
+  border: 0.0625rem solid #a42213;
+  color: rgb(244, 244, 244);
+  width: 75%;
+  min-width: 5.5rem;
+  white-space: nowrap;
+}
+
+.complete-button:hover {
+  background: #f27f73;
+  color: rgb(244, 244, 244);
+}
+
+
+
+/* Container for the expanded content */
+.details-row td {
+    padding: 0; /* Remove padding so the rectangle can sit nicely */
+}
+
+.order-details-rectangle {
+    background-color: #f8f9fa;
+    margin: 10px 20px; /* Gives it the floating rectangle look */
+    padding: 20px;
+    border-radius: 8px;
+    border: 1px solid #e0e0e0;
+    box-shadow: inset 0 2px 4px rgba(0,0,0,0.03);
+}
+
+.details-title {
+    margin-top: 0;
+    color: #333;
+    border-bottom: 2px solid #eee;
+    padding-bottom: 5px;
+}
+
+.items-list {
+    list-style: none;
+    padding: 0;
+}
+
+.item-line {
+    padding: 8px 0;
+    border-bottom: 1px solid #f0f0f0;
+}
+
+.item-qty {
+    font-weight: bold;
+    margin-right: 10px;
+}
+

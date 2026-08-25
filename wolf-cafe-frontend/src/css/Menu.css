@@ -1,0 +1,88 @@
+
+
+#menu-container {
+  width: 100%;
+  /* Fills the space left by the checkout bar and scrolls internally, rather
+     than being pinned to a percentage height that stops matching the shell. */
+  flex: 1 1 auto;
+  min-height: 0;
+
+  display: grid;
+  /* min() keeps a single column from demanding 200px on a narrower phone. */
+  grid-template-columns: repeat(auto-fill, minmax(min(12.5rem, 100%), 1fr));
+
+  /*
+   * Rows must be max-content. The cards set `overflow: hidden` to clip their
+   * rounded image corners, which makes their min-content height collapse to
+   * zero -- so with default `auto` rows the grid happily squashed every row to
+   * share the available height and clipped the name and quantity controls out
+   * of view. max-content rows keep each card at its natural height and let the
+   * grid scroll instead.
+   */
+  grid-auto-rows: max-content;
+  gap: 1.25rem;
+  padding: 1.5rem 0;
+  align-content: flex-start;
+
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+#menu-checkout {
+  width: 100%;
+  max-width: 75rem;
+  flex: 0 0 auto;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  padding: 1rem 1.5rem;
+  background: rgba(255, 255, 255, 0.7);
+  border: 0.0625rem solid rgba(255, 255, 255, 0.8);
+  border-radius: 1rem;
+  backdrop-filter: blur(20px) saturate(1.6);
+  -webkit-backdrop-filter: blur(20px) saturate(1.6);
+  box-shadow:
+    0 0 0 1px rgba(192, 57, 43, 0.06),
+    inset 0 1px 0 rgba(255, 255, 255, 0.9),
+    0 8px 24px rgba(0, 0, 0, 0.08);
+}
+
+#menu-total {
+  font-size: 1rem;
+  font-weight: 700;
+  color: #1a1a1a;
+}
+
+#menu-pay-button {
+  padding: 0.75rem 1.4rem;
+  background: #c0392b;
+  border: none;
+  border-radius: 0.65rem;
+  color: #fff;
+  font-size: 0.92rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  cursor: pointer;
+  transition: background 0.2s ease, transform 0.1s ease;
+  box-shadow: 0 4px 16px rgba(192, 57, 43, 0.28);
+}
+
+#menu-pay-button:hover {
+  background: #e04a3a;
+}
+
+#menu-pay-button:active {
+  transform: scale(0.97);
+}
+@media (max-width: 30rem) {
+  #menu-checkout {
+    justify-content: center;
+    padding: 0.85rem 1rem;
+  }
+
+  #menu-pay-button {
+    width: 100%;
+  }
+}

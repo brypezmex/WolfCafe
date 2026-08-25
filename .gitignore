@@ -1,0 +1,91 @@
+# ---------------------------------------------------------------------------
+# Java / Maven
+# ---------------------------------------------------------------------------
+*.class
+target/
+!**/src/main/**/target/
+!**/src/test/**/target/
+
+# Package files
+*.jar
+*.war
+*.nar
+*.ear
+*.zip
+*.tar.gz
+*.rar
+
+# JVM crash logs
+hs_err_pid*
+replay_pid*
+
+# BlueJ / J2ME leftovers
+*.ctxt
+.mtj.tmp/
+
+# ---------------------------------------------------------------------------
+# Node / Vite
+# ---------------------------------------------------------------------------
+node_modules/
+dist/
+dist-ssr/
+*.local
+
+# ---------------------------------------------------------------------------
+# Local environment files
+#
+# These hold deployment secrets (database password, JWT secret, the seeded
+# account password). The committed *.env.example files document every variable
+# with placeholder values, so the real ones never need to be in git.
+# ---------------------------------------------------------------------------
+.env
+.env.*
+!.env.example
+
+# ---------------------------------------------------------------------------
+# Docker
+#
+# Dockerfiles, docker-compose.yml, and nginx.conf ARE tracked -- they are how
+# the project is deployed. Only per-machine overrides are ignored.
+# ---------------------------------------------------------------------------
+docker-compose.override.yml
+docker-compose.*.local.yml
+
+# ---------------------------------------------------------------------------
+# Logs
+# ---------------------------------------------------------------------------
+*.log
+logs/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# ---------------------------------------------------------------------------
+# Editors and IDEs
+# ---------------------------------------------------------------------------
+.idea/
+*.iml
+*.iws
+*.ipr
+.vscode/
+!.vscode/extensions.json
+.settings/
+.project
+.classpath
+.apt_generated
+.factorypath
+.springBeans
+.sts4-cache
+*.sw?
+*.suo
+
+# Claude Code per-user settings. .claude/launch.json is tracked on purpose:
+# it is the shared dev-server launch config.
+.claude/settings.local.json
+
+# ---------------------------------------------------------------------------
+# OS
+# ---------------------------------------------------------------------------
+.DS_Store
+Thumbs.db

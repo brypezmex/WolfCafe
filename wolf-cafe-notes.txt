@@ -1,0 +1,159 @@
+# Wolf Cafe
+
+## Setup
+- Create GH repo
+	- https://github.ncsu.edu/engr-csc326-staff/WolfCafe
+- Spring Initializer
+	- GroupL edu.ncsu.csc326-staff/WolfCafe
+	- Artifact: wolf-cafe
+	- Name: wolf-cafe
+	- Description: WolfCafe
+	- Package Name: edu.ncsu.csc326.wolf-cafe
+	- Packaging: Jar (do not do WAR - this causes the application to immediatly stop in IntelliJ)
+	- Dependencies
+		- Spring Web
+		- spring Data JPA
+		- MySQL Driver
+		- Lombok
+		- Spring Security
+	- Unzip into GH repo and rename the top level directory to wolf-cafe-backend
+- Open in IntelliJ - open the top level repo directory.  
+	- Let IntelliJ pull info from POM to pull in dependencies.
+- Create packages
+	- config, controller, dto, entity, exception, repository, security, service, utils
+- Set up resources/application.properties
+	- Add to .gitignore - this should be done in the commit window by selecting the file and adding to .gitignore for the backend folder
+- Add anything in .idea to .idea/.gitignore except for the .gitignore	
+	- Should be done in the commit window.
+- Remove the ! in front of .mvn/wrapper/maven-wrapper.jar to in project/.gitignore
+- Updaate application.properties
+
+```
+spring.application.name=wolf-cafe
+spring.datasource.url=jdbc:mysql://localhost:3306/wolf_cafe
+spring.datasource.username=root
+spring.datasource.password=
+
+spring.jpa.properties.hibernate.dialect=org.hibernate.dialect.MySQLDialect
+spring.jpa.hibernate.ddl-auto=update
+```
+
+
+- Create wolf_cafe DB
+
+## Wolf Cafe Requirements
+
+UC 0.X: Authentication and Authorization
+- Login
+- Logout
+- Change password
+- Register
+- Create employee
+- Create manager
+
+UC 1.X: Items
+- [E] Create items 
+- [E] Update items
+- [M] Remove (delete) items from sale
+- [All] Get all items
+- [All] Get single items
+
+Items know
+- id
+- name
+- description
+- price
+- category [ADDED LATER]
+
+UC 2.X: Categories
+- [E] Create category
+- [E] Update category
+- [E] Add item to category
+- [E] Remove item from category
+- [All] Get all categories
+- [All] Get single category
+- [All] Get items for a category
+
+UC 3.X: Orders
+- [C] Create order
+- [C] Add item to order
+- [C] Submit order
+- [C] Cancel order
+- [E] List all orders
+	- [E] List all open orders
+	- [E] List all processed orders
+	- [E] List all closed orders
+	- [E] List all canceled orders
+- [E] Process order
+- [C] Pick up order
+
+UC 3.X: Management
+
+## Implement Items
+Start implementing Items without Categories
+
+- entity.Item
+	- Create fields
+		- id: @Id, @GeneratedValue(strategy = GenerationType.IDENTITY)
+		- name: not null, unique
+		- description
+		- price: not null
+	- Annotations
+		@Getter
+		@Setter
+		@NoArgsConstructor
+		@AllArgsConstructor
+		@Entity
+		@Table(name = "items")
+- repository.ItemRepository (Interface)
+	extends JpaRepository<T, ID> where T is the entity and ID is the type of the primary key
+- dto.ItemDto
+	- Create fields for id, name, description, price (no need for category here)
+	- Annotations
+		@Getter
+		@Setter
+		@NoArgsConstructor
+		@AllArgsConstructor
+- service.ItemService (Interface)
+	- Add methods for REST API functionality
+	    ItemDto addItem(ItemDto itemDto);
+
+		ItemDto getItem(Long id);
+
+		List<ItemDto> getAllItems();
+
+		ItemDto updateItem(Long id, ItemDto itemDto);
+
+		void deleteItem(Long id);
+- service.impl.ItemServiceImpl
+	- Implements ItemService
+	- Annotations
+		- @Service
+		- @AllArgsConstructor
+	- Inject dependencies
+		- ItemRepository
+		- ModelMapper - need to add the dependency to POM and then import.  Can do this all from IntelliJ.
+		- Additional Implementation (some auto/some manual)
+			- ModelMapper library to do the conversions between Dto and Entity
+				- modelmapper.org/getting-started
+				- Add dependency to pom & refresh
+				- Add modelMapper() method with @Bean annotation to Application class 
+					returns a new ModelMapper
+				- Inject in ServiceImpl class
+				- Use in addTodo
+					ToType toType = modelMapper.map(fromType, ToType.class)
+	- Implement the methods
+	- Create ResourceNotFoundException
+- exception.ResourceNotFoundException
+	- extends RuntimeException
+	- @ResponseStatus(value = HttpStatus.NOT_FOUND)
+	- create the constructor with the parameter
+- controller.ItemController
+	- Annotations
+		- @RestController
+		- @RequestMapping("api/items"
+		- @AllArgsController
+		- @CrossOrigin("*") - may leave out to then add later to demo the error
+	- Dependencies
+		- Service
+	- Implement methods

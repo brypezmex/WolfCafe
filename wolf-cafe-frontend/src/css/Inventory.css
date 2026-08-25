@@ -1,0 +1,42 @@
+
+
+#add-ingredient-button-container {
+  display: flex;
+  justify-content: flex-end;
+  /* Matches .table-wrap so the button lines up with the table's right edge. */
+  width: 100%;
+  max-width: 75rem;
+  /* Sits at the bottom of the scroll area regardless of how tall it is. */
+  margin-top: auto;
+  padding-top: 1rem;
+}
+
+#add-ingredient-button {
+  width: 2.75rem;
+  height: 2.75rem;
+  background: rgba(255, 255, 255, 0.75);
+  border: 0.0625rem solid rgba(255, 255, 255, 0.5);
+  border-radius: 50%;
+  color: #c0392b;
+  font-size: 1.4rem;
+  font-weight: 700;
+  cursor: pointer;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08), inset 0 1px 0 rgba(255, 255, 255, 0.6);
+  transition: background 0.2s ease, transform 0.15s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#add-ingredient-button:hover {
+  background: rgba(192, 57, 43, 0.15);
+  transform: rotate(90deg) translateY(-1px);
+}
+
+#add-ingredient-button:active {
+  transform: rotate(90deg);
+}
+
+

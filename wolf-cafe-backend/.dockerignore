@@ -1,0 +1,9 @@
+target/
+.checkstyle
+.pmd
+.settings
+.project
+.classpath
+diagrams/
+**/*.log
+src/test/resources/application.properties
