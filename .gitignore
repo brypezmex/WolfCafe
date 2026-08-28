@@ -80,9 +80,8 @@ pnpm-debug.log*
 *.sw?
 *.suo
 
-# Claude Code per-user settings. .claude/launch.json is tracked on purpose:
-# it is the shared dev-server launch config.
-.claude/settings.local.json
+# Claude Code project files (local dev tooling, not part of the repo)
+.claude/
 
 # ---------------------------------------------------------------------------
 # OS
