@@ -37,6 +37,9 @@ services:
   backend:
     build:
       context: ./wolf-cafe-backend
+      # Bridge-network builds have no egress in this environment (Maven/npm
+      # can't reach their registries), so build with the host's network.
+      network: host
     restart: unless-stopped
     depends_on:
       db:
@@ -77,6 +80,9 @@ services:
   frontend:
     build:
       context: ./wolf-cafe-frontend
+      # Bridge-network builds have no egress in this environment (Maven/npm
+      # can't reach their registries), so build with the host's network.
+      network: host
       args:
         # Relative path: resolved against whatever host serves the page.
         VITE_API_BASE_URL: ${VITE_API_BASE_URL:-/api}
@@ -89,6 +95,7 @@ services:
       - "${WEB_PORT:-8080}:80"
     networks:
       - wolfcafe
+      - webnet
 
   # Optional: run the tunnel alongside the app instead of on the host.
   #   docker compose --profile tunnel up -d
@@ -110,3 +117,9 @@ volumes:
 networks:
   wolfcafe:
     driver: bridge
+  # The shared network used by the root /opt/web-stack stack (nginx-proxy-manager,
+  # cloudflared). Lets NPM reach `frontend` by container name without publishing
+  # a port for it.
+  webnet:
+    external: true
+    name: web-stack_webnet

@@ -43,6 +43,23 @@ dist-ssr/
 !.env.example
 
 # ---------------------------------------------------------------------------
+# Database dumps and key/cert material
+#
+# DEPLOYMENT.md documents creating ad-hoc dumps (e.g. wolfcafe-backup.sql) and
+# generating deploy keys/certs directly in a checkout. None of that belongs in
+# the repo.
+# ---------------------------------------------------------------------------
+*.sql
+*.sql.gz
+*.pem
+*.key
+*.crt
+*.p12
+id_rsa*
+id_ed25519*
+*.pub
+
+# ---------------------------------------------------------------------------
 # Docker
 #
 # Dockerfiles, docker-compose.yml, and nginx.conf ARE tracked -- they are how
